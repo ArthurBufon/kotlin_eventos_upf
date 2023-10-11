@@ -10,10 +10,10 @@ import java.time.LocalDate
 
 @RestController
 @RequestMapping("/eventos")
-class EventoController(val eventoService: EventoService) {
+class EventoController(val service: EventoService) {
 
     @GetMapping
     fun listar(): List<Evento>{
-        return eventoService.listar();
+        return service.listar();
     }
 }

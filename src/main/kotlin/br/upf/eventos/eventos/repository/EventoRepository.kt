@@ -49,5 +49,11 @@ class EventoRepository(private var eventos: MutableList<Evento>) {
         eventos = mutableListOf(evento1, evento2, evento3);
     }
 
+    // Returns all Eventos.
     fun findAll() = eventos;
+
+    // Creates new Evento.
+    fun create(evento: Evento) {
+        eventos.add(evento);
+    }
 }

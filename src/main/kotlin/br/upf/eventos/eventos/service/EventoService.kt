@@ -14,4 +14,8 @@ class EventoService(private val repository: EventoRepository) {
     fun getById(id: Long): Evento {
         return repository.findAll().first { it.id == id };
     }
+
+    fun create(evento: Evento) {
+        return repository.create(evento);
+    }
 }

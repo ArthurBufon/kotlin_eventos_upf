@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service
 @Service
 class EventoService(private val repository: EventoRepository) {
 
-    fun listar(): List<Evento>{
+    fun getAll(): List<Evento> {
         return repository.findAll();
+    }
+
+    fun getById(id: Long): Evento {
+        return repository.findAll().first { it.id == id };
     }
 }

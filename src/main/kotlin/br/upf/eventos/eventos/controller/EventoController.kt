@@ -5,6 +5,7 @@ import br.upf.eventos.eventos.dtos.EventoResponseDTO
 import br.upf.eventos.eventos.model.Evento
 import br.upf.eventos.eventos.model.StatusEvento
 import br.upf.eventos.eventos.service.EventoService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,7 +29,7 @@ class EventoController(val service: EventoService) {
     }
 
     @PostMapping
-    fun create(@RequestBody evento: EventoDTO){
+    fun create(@RequestBody @Valid evento: EventoDTO) {
         service.create(evento);
     }
 }

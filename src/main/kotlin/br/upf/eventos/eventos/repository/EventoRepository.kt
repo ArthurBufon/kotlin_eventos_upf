@@ -56,4 +56,20 @@ private var idCont = 6L
     fun create(evento: Evento) {
         eventos.add(evento.copy(id = idCont++));
     }
+
+    // Updates Evento.
+    fun update(evento: Evento, eventoData: Evento) {
+        eventos.remove(evento);
+        eventos.add(
+            Evento(
+                id = evento.id,
+                nome = eventoData.nome,
+                data = eventoData.data,
+                dataInicioInsc = eventoData.dataInicioInsc,
+                dataFimInsc = eventoData.dataFimInsc,
+                descricao = eventoData.descricao,
+                status = eventoData.status,
+            )
+        )
+    }
 }

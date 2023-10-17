@@ -1,6 +1,7 @@
 package br.upf.eventos.eventos.controller
 
 import br.upf.eventos.eventos.dtos.EventoDTO
+import br.upf.eventos.eventos.dtos.EventoResponseDTO
 import br.upf.eventos.eventos.model.Evento
 import br.upf.eventos.eventos.model.StatusEvento
 import br.upf.eventos.eventos.service.EventoService
@@ -17,12 +18,12 @@ import java.time.LocalDate
 class EventoController(val service: EventoService) {
 
     @GetMapping
-    fun getAll(): List<Evento> {
+    fun getAll(): List<EventoResponseDTO> {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long): Evento {
+    fun getById(@PathVariable id: Long): EventoResponseDTO {
         return service.getById(id);
     }
 

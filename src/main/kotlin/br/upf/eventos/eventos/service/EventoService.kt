@@ -27,4 +27,9 @@ class EventoService(private val repository: EventoRepository, private val conver
         val evento =  repository.findAll().first { it.id == id };
         return repository.update(evento, converter.toEvento(dto));
     }
+
+    fun destroy(id: Long) {
+        val evento =  repository.findAll().first { it.id == id };
+        return repository.destroy(evento);
+    }
 }

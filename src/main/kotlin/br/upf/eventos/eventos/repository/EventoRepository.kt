@@ -72,4 +72,8 @@ private var idCont = 6L
             )
         )
     }
+
+    fun destroy(evento: Evento) {
+        eventos.remove(evento);
+    }
 }

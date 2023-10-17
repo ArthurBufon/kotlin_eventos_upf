@@ -1,5 +1,6 @@
 package br.upf.eventos.eventos.controller
 
+import br.upf.eventos.eventos.dtos.EventoDTO
 import br.upf.eventos.eventos.model.Evento
 import br.upf.eventos.eventos.model.StatusEvento
 import br.upf.eventos.eventos.service.EventoService
@@ -26,7 +27,7 @@ class EventoController(val service: EventoService) {
     }
 
     @PostMapping
-    fun create(@RequestBody evento: Evento){
+    fun create(@RequestBody evento: EventoDTO){
         service.create(evento);
     }
 }

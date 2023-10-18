@@ -35,6 +35,7 @@ class EventoController(val service: EventoService) {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun create(
         @RequestBody @Valid evento: EventoDTO,
         uriBuilder: UriComponentsBuilder

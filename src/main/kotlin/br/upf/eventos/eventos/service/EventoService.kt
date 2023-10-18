@@ -15,21 +15,21 @@ class EventoService(private val repository: EventoRepository, private val conver
     }
 
     fun getById(id: Long): EventoResponseDTO {
-        val evento =  repository.findAll().first { it.id == id };
+        val evento = repository.findAll().first { it.id == id };
         return converter.toEventoResponseDTO(evento);
     }
 
-    fun create(dto: EventoDTO) {
-        return repository.create(converter.toEvento(dto));
+    fun create(dto: EventoDTO): EventoResponseDTO {
+        return converter.toEventoResponseDTO(repository.create(converter.toEvento(dto)));
     }
 
-    fun update(id: Long, dto: EventoDTO) {
-        val evento =  repository.findAll().first { it.id == id };
-        return repository.update(evento, converter.toEvento(dto));
+    fun update(id: Long, dto: EventoDTO): EventoResponseDTO {
+        val evento = repository.findAll().first { it.id == id };
+        return converter.toEventoResponseDTO(repository.update(evento, converter.toEvento(dto)));
     }
 
     fun destroy(id: Long) {
-        val evento =  repository.findAll().first { it.id == id };
+        val evento = repository.findAll().first { it.id == id };
         return repository.destroy(evento);
     }
 }

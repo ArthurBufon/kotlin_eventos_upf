@@ -7,7 +7,8 @@ import java.time.LocalDate
 
 @Repository
 class EventoRepository(private var eventos: MutableList<Evento>) {
-private var idCont = 6L
+    private var idCont = 6L
+
     init {
         // Data de hoje.
         val hoje = LocalDate.now();
@@ -53,14 +54,17 @@ private var idCont = 6L
     fun findAll() = eventos;
 
     // Creates new Evento.
-    fun create(evento: Evento) {
-        eventos.add(evento.copy(id = idCont++));
+    fun create(evento: Evento): Evento {
+        val eventoCreated = evento.copy(id = idCont++);
+        eventos.add(eventoCreated);
+        return eventoCreated;
     }
 
     // Updates Evento.
-    fun update(evento: Evento, eventoData: Evento) {
+    fun update(evento: Evento, eventoData: Evento): Evento {
         eventos.remove(evento);
-        eventos.add(
+
+        val eventoWithId =
             Evento(
                 id = evento.id,
                 nome = eventoData.nome,
@@ -70,7 +74,10 @@ private var idCont = 6L
                 descricao = eventoData.descricao,
                 status = eventoData.status,
             )
-        )
+
+        eventos.add(eventoWithId)
+
+        return eventoWithId;
     }
 
     fun destroy(evento: Evento) {

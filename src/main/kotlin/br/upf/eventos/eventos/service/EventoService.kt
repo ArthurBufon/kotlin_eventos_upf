@@ -3,6 +3,7 @@ package br.upf.eventos.eventos.service
 import br.upf.eventos.eventos.converters.EventoConverter
 import br.upf.eventos.eventos.dtos.EventoDTO
 import br.upf.eventos.eventos.dtos.EventoResponseDTO
+import br.upf.eventos.eventos.exceptions.NotFoundException
 import br.upf.eventos.eventos.model.Evento
 import br.upf.eventos.eventos.repository.EventoRepository
 import org.springframework.stereotype.Service
@@ -15,7 +16,7 @@ class EventoService(private val repository: EventoRepository, private val conver
     }
 
     fun getById(id: Long): EventoResponseDTO {
-        val evento = repository.findAll().first { it.id == id };
+        val evento = repository.findAll().firstOrNull() { it.id == id }?:throw NotFoundException("Evento não encontrado!");
         return converter.toEventoResponseDTO(evento);
     }
 
@@ -24,12 +25,12 @@ class EventoService(private val repository: EventoRepository, private val conver
     }
 
     fun update(id: Long, dto: EventoDTO): EventoResponseDTO {
-        val evento = repository.findAll().first { it.id == id };
+        val evento = repository.findAll().firstOrNull() { it.id == id }?:throw NotFoundException("Evento não encontrado!");
         return converter.toEventoResponseDTO(repository.update(evento, converter.toEvento(dto)));
     }
 
     fun destroy(id: Long) {
-        val evento = repository.findAll().first { it.id == id };
+        val evento = repository.findAll().firstOrNull() { it.id == id }?:throw NotFoundException("Evento não encontrado!");
         return repository.destroy(evento);
     }
 }

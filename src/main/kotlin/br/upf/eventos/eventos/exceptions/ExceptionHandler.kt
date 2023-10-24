@@ -3,6 +3,7 @@ package br.upf.eventos.eventos.exceptions
 import br.upf.eventos.eventos.dtos.ErrorResponseDTO
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -58,6 +59,20 @@ class ExceptionHandler {
             error = HttpStatus.INTERNAL_SERVER_ERROR.name,
             message = errorMessage.toString(),
             path = request.servletPath,
+        )
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handlerValidationErrorKotlin(
+        exception: HttpMessageNotReadableException,
+        request: HttpServletRequest
+    ): ErrorResponseDTO {
+        return ErrorResponseDTO(
+            status = HttpStatus.BAD_REQUEST.value(),
+            error = HttpStatus.BAD_REQUEST.name,
+            message = exception.message ?: "Error não identificado!",
+            path = request.servletPath
         )
     }
 }

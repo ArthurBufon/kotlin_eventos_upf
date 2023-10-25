@@ -5,6 +5,9 @@ import br.upf.eventos.eventos.dtos.EventoResponseDTO
 import br.upf.eventos.eventos.service.EventoService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -24,8 +27,9 @@ import org.springframework.web.util.UriComponentsBuilder
 class EventoController(val service: EventoService) {
 
     @GetMapping
-    fun getAll(@RequestParam(required = false) nomeEvento: String?): List<EventoResponseDTO> {
-        return service.getAll(nomeEvento);
+    fun getAll(@RequestParam(required = false) nomeEvento: String?,
+               @PageableDefault(page = 10) paginacao: Pageable): Page<EventoResponseDTO> {
+        return service.getAll(nomeEvento, paginacao);
     }
 
     @GetMapping("/{id}")
